@@ -18,6 +18,7 @@ class CounselorManager(BaseUserManager):
         segment,
         CAE_Type,
         CAE,
+        **kwargs
     ):
         counselor = Counselor()
 
@@ -56,5 +57,5 @@ class Counselor(AbstractBaseUser):
         'isPresident',
         'segment',
         'CAE_Type',
-        'CAE'
+        'CAE',
         ]

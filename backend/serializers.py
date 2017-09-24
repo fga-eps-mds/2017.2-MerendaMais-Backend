@@ -6,14 +6,12 @@ from rest_framework import serializers
 class CounselorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Counselor
-        fields = (
-         'url',
-         'cpf',
-         'email',
-         'phone',
-         'name',
-         'isPresident',
-         'segment',
-         'CAE_Type',
-         'CAE'
-        )
+        fields = ('__all__')
+
+        extra_kwargs = {
+          'password': {'write_only': True}
+        }
+
+    def create(self, validated_data):
+        counselor = Counselor.objects.create_user(**validated_data)
+        return counselor
