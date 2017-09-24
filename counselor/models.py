@@ -7,24 +7,29 @@ from django.contrib.auth.models import (
 
 
 class CounselorManager(BaseUserManager):
-    def create_user(self, cpf, email, phone, first_name):
+    def create_user(
+        self,
+        cpf,
+        email,
+        phone,
+        name,
+        password,
+        isPresident,
+        segment,
+        CAE_Type,
+        CAE,
+    ):
         counselor = Counselor()
+
         counselor.email = self.normalize_email(email)
         counselor.phone = phone
         counselor.cpf = cpf
-        counselor.first_name = first_name
-
-        counselor.save(using=self.db)
-
-        return counselor
-
-    def create_superuser(self, cpf, email, phone, first_name, password):
-        counselor = Counselor()
-        counselor.email = self.normalize_email(email)
-        counselor.phone = phone
-        counselor.cpf = cpf
-        counselor.first_name = first_name
+        counselor.name = name
         counselor.set_password(password)
+        counselor.isPresident = isPresident
+        counselor.segment = segment
+        counselor.CAE_Type = CAE_Type
+        counselor.CAE = CAE
 
         counselor.save(using=self.db)
 
@@ -34,10 +39,22 @@ class CounselorManager(BaseUserManager):
 class Counselor(AbstractBaseUser):
     email = models.EmailField(max_length=50, unique=True)
     phone = models.CharField(max_length=10)
-    first_name = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
+    cpf = models.CharField(max_length=50, primary_key=True)
+    isPresident = models.BooleanField(default=False)
+    segment = models.CharField(max_length=50)
+    CAE_Type = models.CharField(max_length=50)
+    CAE = models.CharField(max_length=50)
 
     objects = CounselorManager()
 
     USERNAME_FIELD = 'cpf'
-    REQUIRED_FIELDS = ['email', 'phone', 'first_name']
+    REQUIRED_FIELDS = [
+        'email',
+        'phone',
+        'name',
+        'isPresident',
+        'segment',
+        'CAE_Type',
+        'CAE'
+        ]

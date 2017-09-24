@@ -6,4 +6,14 @@ from rest_framework import serializers
 class CounselorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Counselor
-        fields = ('id', 'url', 'cpf', 'email', 'phone', 'first_name')
+        fields = (
+         'url',
+         'cpf',
+         'email',
+         'phone',
+         'name',
+         'isPresident',
+         'segment',
+         'CAE_Type',
+         'CAE'
+        )
