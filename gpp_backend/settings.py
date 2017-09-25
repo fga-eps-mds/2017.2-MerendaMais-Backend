@@ -47,8 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'counselor',
     'backend',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 AUTH_USER_MODEL = 'counselor.Counselor'
 
