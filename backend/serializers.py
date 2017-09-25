@@ -1,10 +1,14 @@
 # Local Django.
 from counselor.models import Counselor
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 
 
 class CounselorSerializer(serializers.HyperlinkedModelSerializer):
-    cpf = serializers.CharField(max_length=11)
+    cpf = serializers.CharField(
+        max_length=11,
+        validators=[UniqueValidator(queryset=Counselor.objects.all())]
+    )
 
     class Meta:
         model = Counselor

@@ -41,7 +41,7 @@ class Counselor(AbstractBaseUser):
     email = models.EmailField(max_length=50, unique=True)
     phone = models.CharField(max_length=10)
     name = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=50, primary_key=True)
+    cpf = models.CharField(max_length=50, unique=True)
     isPresident = models.BooleanField(default=False)
     segment = models.CharField(max_length=50)
     CAE_Type = models.CharField(max_length=50)
