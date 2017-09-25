@@ -4,6 +4,8 @@ from rest_framework import serializers
 
 
 class CounselorSerializer(serializers.HyperlinkedModelSerializer):
+    cpf = serializers.CharField(max_length=11)
+
     class Meta:
         model = Counselor
         fields = ('__all__')
