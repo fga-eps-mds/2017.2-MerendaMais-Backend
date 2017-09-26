@@ -20,5 +20,10 @@ class CustomObtainAuthToken(ObtainAuthToken):
         token = Token.objects.get(key=response.data['token'])
         counselor = Counselor.objects.all().get(id=token.user_id)
         return Response(
-            {'token': token.key, 'name': counselor.name, 'cpf': counselor.cpf}
+            {
+                'token': token.key,
+                'name': counselor.name,
+                'cpf': counselor.cpf,
+                'id': counselor.id
+            }
         )
