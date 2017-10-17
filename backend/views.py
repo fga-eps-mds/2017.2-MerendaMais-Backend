@@ -41,9 +41,7 @@ class SchoolViewSet(viewsets.ModelViewSet):
         # If a key is name, append its value to our response.
 
         for each_element in r:
-            for key in each_element.keys():
-                if(key == "nome"):
-                    response.append({'nome': each_element[key]})
+            response.append({'nome': each_element['nome']})
 
         # Convert list to Json.
         response = json.dumps(response)
